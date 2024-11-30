@@ -6,13 +6,24 @@ import { UserModel } from "../Models/UserModel.js";
 export const register = async (req, res) => {
   try {
     const { name, email, password } = req.body;
+    console.log(name , email , password )
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new UserModel({ name, email, password: hashedPassword });
+    
     await newUser.save();
     const token = jwt.sign({ user: newUser }, process.env.JWT_SECRET, { expiresIn: "1h" });
-    res.status(201).json({ token });
+    res.status(201)
+            .json({
+                message:"Signup successfully",
+                success:true,
+                token:token
+            })
   } catch (error) {
-    res.status(500).json({ message: "Server error." });
+    res.status(500)
+            .json({
+                message:"Internal server error",
+                success:false 
+            })
   }
 };
 
@@ -29,9 +40,19 @@ export const login = async (req, res) => {
       return res.status(400).json({ message: "Invalid credentials." });
     }
     const token = jwt.sign({ user }, process.env.JWT_SECRET, { expiresIn: "1h" });
-    res.status(200).json({ token });
+    res.status(201)
+            .json({
+                message:"Signup successfully",
+                success:true,
+                token:token,
+                user:user.name
+            })
   } catch (error) {
-    res.status(500).json({ message: "Server error." });
+    res.status(500)
+            .json({
+                message:"Internal server error",
+                success:false 
+            })
   }
 };
 
