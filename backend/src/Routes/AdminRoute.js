@@ -1,5 +1,5 @@
 import express from "express";
-import { getAllUsers, deleteUser, createPost, getAllPosts } from "../Controllers/AdminController.js";
+import { getAllUsers, deleteUser, createPost, getAllPosts, makeModerator } from "../Controllers/AdminController.js";
 import { authenticateUser, authorizeRole } from "../Middlewares/authMiddleware.js";
 
 const router = express.Router();
@@ -14,5 +14,8 @@ router.delete("/users/:id", authorizeRole("Admin"), deleteUser);  // Delete a us
 // Admin can manage posts
 router.post("/posts", authorizeRole("Admin"), createPost);  // Create a post
 router.get("/posts", authorizeRole("Admin"), getAllPosts);  // Get all posts
+
+// Admin assing modretor role 
+router.patch("/user/:id", authorizeRole("Admin"), makeModerator);  // Get all posts
 
 export { router as AdminRoutes };

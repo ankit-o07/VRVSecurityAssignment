@@ -10,6 +10,7 @@ import { AuthRoutes } from './src/Routes/AuthRoute.js';
 import { AdminRoutes } from './src/Routes/AdminRoute.js';
 import { UserRoutes } from './src/Routes/UserRoute.js';
 import { ModeratorRoutes } from './src/Routes/ModeratorRouts.js';
+import { RootRoutes } from './src/Routes/Root.js';
 
 
 
@@ -30,7 +31,8 @@ app.use(cors());
 
 
 
-
+// Get All posts with out login for guset user
+app.use('/', RootRoutes);
 
 // Auth Routes (Public access for registration, login, etc.)
 app.use('/api/auth', AuthRoutes);

@@ -8,7 +8,7 @@ function RefreshHandler({ setIsAuthenticated }) {
     useEffect(()=>{
         if(localStorage.getItem('token')){
             setIsAuthenticated(true)
-            if(location.pathname === "/" || location.pathname === "/login" || location.pathname === "/signup"){
+            if(location.pathname === "/login" || location.pathname === "/signup"){
                 navigate("/home", {replace:false});
             }
         }

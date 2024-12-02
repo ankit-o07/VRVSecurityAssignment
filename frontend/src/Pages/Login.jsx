@@ -38,12 +38,13 @@ const Login = () => {
             
         });
         const result = await response.json();
-        const {success , error,message, token , name } = result;
+        const {success , error,message, token , user,role } = result;
         console.log(result);
         if(success){
             handleSuccess(message);
             localStorage.setItem("token",token, );
-            localStorage.setItem("loggedInUser", name);
+            localStorage.setItem("loggedInUser", user);
+            localStorage.setItem("role",role);
             setTimeout(()=>{
                 navigate("/home")
             },1000)

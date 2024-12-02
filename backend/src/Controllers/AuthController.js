@@ -17,6 +17,7 @@ export const register = async (req, res) => {
                 message:"Signup successfully",
                 success:true,
                 token:token
+                
             })
   } catch (error) {
     res.status(500)
@@ -39,13 +40,16 @@ export const login = async (req, res) => {
     if (!isMatch) {
       return res.status(400).json({ message: "Invalid credentials." });
     }
-    const token = jwt.sign({ user }, process.env.JWT_SECRET, { expiresIn: "1h" });
+    const token = jwt.sign({ user }, process.env.JWT_SECRET, { expiresIn: "24h" });
+    
     res.status(201)
             .json({
                 message:"Signup successfully",
                 success:true,
                 token:token,
-                user:user.name
+                user:user.name,
+                role:user.role
+
             })
   } catch (error) {
     res.status(500)

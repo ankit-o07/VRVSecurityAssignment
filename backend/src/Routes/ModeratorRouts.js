@@ -14,4 +14,6 @@ router.patch("/posts/:id", moderatePost);  // Approve or Reject posts
 // Moderator can approve/reject comments
 router.patch("/comments/:id", moderateComment);  // Approve or Reject comments
 
+
+
 export { router as ModeratorRoutes };
